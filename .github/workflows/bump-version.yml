@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: save date
-        run: echo "${{ steps.release_drafter.tag_name }}" > date_file
+        run: echo "${{ steps.release_drafter.outputs.tag_name }}" > date_file
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
