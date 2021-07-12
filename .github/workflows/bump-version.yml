@@ -11,8 +11,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref}}
+      - name: draft_release
+        id: release_drafter
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: save date
-        run: echo "$(date)" > date_file
+        run: echo "${{ steps.release_drafter.tag_name }}" > date_file
       - name: commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
